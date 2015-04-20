@@ -12,6 +12,8 @@ daa_competition.egg-info/not-zip-safe
 daa_competition.egg-info/requires.txt
 daa_competition.egg-info/top_level.txt
 daacompetition/__init__.py
+daacompetition/models.py
+daacompetition/security.py
 daacompetition/tests.py
 daacompetition/views.py
 daacompetition/static/pyramid-16x16.png
