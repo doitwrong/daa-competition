@@ -21,3 +21,4 @@ daacompetition/static/pyramid.png
 daacompetition/static/theme.css
 daacompetition/static/theme.min.css
 daacompetition/templates/mytemplate.pt
+daacompetition/templates/submittask.pt
