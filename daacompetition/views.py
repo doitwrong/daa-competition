@@ -1,4 +1,5 @@
 from pyramid.view import view_config
+import os
 
 from pyramid.httpexceptions import (
     HTTPFound,
@@ -28,6 +29,10 @@ def submit(request):
     pagename = 'submit'
     edit_url = request.route_url('submit', pagename=pagename)
     content='<h1> THIS CAME FROM submit() </h1>'
+    fn = os.path.join(os.path.dirname(__file__), 'data/users')
+    with open(fn , 'r') as f:
+        read_data = f.read()
+        print(read_data)
     return dict(pagename=pagename,
                 content=content,
                 edit_url=edit_url, 
