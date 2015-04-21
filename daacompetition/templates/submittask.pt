@@ -12,7 +12,7 @@
 
 	<h1> SOME PROTECTED RESOURCE </h1>
 	
-	<span tal:replace="content"/>
+	<span tal:replace="structure content"/>
 	
   </body>
 </html>
