@@ -27,7 +27,7 @@ def my_view(request):
 def submit(request):
     pagename = 'submit'
     edit_url = request.route_url('submit', pagename=pagename)
-    content='dasdasdasd'
+    content='<h1> THIS CAME FROM submit() </h1>'
     return dict(pagename=pagename,
                 content=content,
                 edit_url=edit_url, 
