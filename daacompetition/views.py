@@ -23,9 +23,11 @@ from .security import USERS
 def my_view(request):
     return {'project': 'daa-competition'}
 
-
-@view_config(route_name='submit', renderer='templates/submittask.pt')
+''' logika ot stranicata za predvane na zadachi'''
+@view_config(route_name='submit', renderer='templates/submittask.pt',
+             permission='student')
 def submit(request):
+    print("SUBMIT")
     pagename = 'submit'
     edit_url = request.route_url('submit', pagename=pagename)
     content='<h1> THIS CAME FROM submit() </h1>'
@@ -42,6 +44,7 @@ def submit(request):
 @view_config(route_name='login', renderer='templates/login.pt')
 @forbidden_view_config(renderer='templates/login.pt')
 def login(request):
+    print("LOGIN")
     login_url = request.route_url('login')
     referrer = request.url
     if referrer == login_url:
