@@ -9,6 +9,8 @@
 #Quick setup
 
 ```Shell
-python3.4 -c 'import setuptools'
+python3.4 -c 'import setuptools' &&
+wget https://raw.githubusercontent.com/doitwrong/daa-competition/master/requirements/ez_setup.py &&
+rm ez_setup.py
 
 ```
