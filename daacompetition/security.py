@@ -12,10 +12,9 @@ with open(users) as f:
 
 with open(permissions) as f:
     for line in f:
-       (key, val) = line.split()
-       GROUPS[key] = val
+        (key, val) = line.split()
+        GROUPS[key] = val
 
 def groupfinder(userid, request):
     if userid in USERS:
         return GROUPS.get(userid, [])
-
