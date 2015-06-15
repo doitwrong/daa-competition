@@ -11,3 +11,10 @@ barzo podkarvane pod unix
 # slesvashtite v root-a na proekta
 $VENV/bin/python setup.py develop
 $VENV/bin/pserve development.ini --reload
+
+
+
+```Shell
+python3.4 -c 'import setuptools'
+
+```
