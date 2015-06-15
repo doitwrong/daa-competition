@@ -6,13 +6,7 @@
 коректност на изходните данни) и накрая да показвам класацията след като
 мине времето за изпращане на решения.
 
-barzo podkarvane pod unix
-# installing pyramid -> http://docs.pylonsproject.org/projects/pyramid/en/1.5-branch/narr/install.html#installing-chapter
-# slesvashtite v root-a na proekta
-$VENV/bin/python setup.py develop
-$VENV/bin/pserve development.ini --reload
-
-
+#Quick setup
 
 ```Shell
 python3.4 -c 'import setuptools'
