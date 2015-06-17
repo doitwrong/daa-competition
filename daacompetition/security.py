@@ -17,4 +17,4 @@ with open(permissions) as f:
 
 def groupfinder(userid, request):
     if userid in USERS:
-        return GROUPS.get(userid, [])
+        return [GROUPS.get(userid, [])]
