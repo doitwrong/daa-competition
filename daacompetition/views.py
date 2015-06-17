@@ -19,15 +19,16 @@ from pyramid.security import (
 from .security import USERS
 
 
+"""
 @view_config(route_name='home', renderer='templates/mytemplate.pt')
 def my_view(request):
     return {'project': 'daa-competition'}
-
+"""
 
 @view_config(route_name='submit', renderer='templates/submittask.pt',
              permission='student')
 def submit(request):
-    ''' logika ot stranicata za predvane na zadachi'''
+    """ logika ot stranicata za predvane na zadachi"""
     print("SUBMIT")
     pagename = 'submit'
     edit_url = request.route_url('submit', pagename=pagename)
