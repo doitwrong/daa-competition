@@ -33,11 +33,13 @@ def view_tests(request):
     username = "<b>" + request.authenticated_userid + "</b>"
     pagename = 'submit'
     edit_url = request.route_url('viewtests', pagename=pagename)
-    content='<tr><td> TEST1 </td></tr><tr><td> TEST2 </td></tr>'
-    fn = os.path.join(os.path.dirname(__file__), 'data/users')
+    #content='<tr><td> TEST1 </td></tr><tr><td> TEST2 </td></tr>'
+    fn = os.path.join(os.path.dirname(__file__), 'data/test_results/'+request.authenticated_userid)
+    content = ""
     with open(fn , 'r') as f:
         read_data = f.read()
         print(read_data)
+        content += '<tr><td>' + read_data + '</td></tr>'
     return dict(pagename=pagename,
                 content=content,
                 edit_url=edit_url,
