@@ -10,9 +10,15 @@
 
   <body>
 
-	<h1> SOME PROTECTED RESOURCE </h1>
+	RESULTS FOR USERNAME: <span tal:replace="structure username"/>
+
+    <table>
+
+    <td><h1>dasdasd</h1></td>
 
 	<span tal:replace="structure content"/>
+
+    </table>
 
   </body>
 </html>

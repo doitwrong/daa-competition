@@ -30,6 +30,7 @@ def my_view(request):
 def view_tests(request):
     """ logika ot pregleda na test rezultatite ot tekushtoto sastezanie """
     print("USERID: ",request.authenticated_userid)
+    username = "<b>" + request.authenticated_userid + "</b>"
     pagename = 'submit'
     edit_url = request.route_url('viewtests', pagename=pagename)
     content='<h1> THIS CAME FROM submit() </h1>'
@@ -39,7 +40,8 @@ def view_tests(request):
         print(read_data)
     return dict(pagename=pagename,
                 content=content,
-                edit_url=edit_url, 
+                edit_url=edit_url,
+                username = username,
                 logged_in = request.authenticated_userid )
 
 
