@@ -8,16 +8,13 @@
     <meta name="author" content="DAA SUBMIT TASK">
   </head>
 
-
-  RESULTS FOR USERNAME: <span tal:replace="structure username"/>
-
   <body>
+
+    RESULTS FOR USERNAME: <span tal:replace="structure username"/>
 
     <table border="1">
 
-    <td><h1>dasdasd</h1></td>
-
-	<span tal:replace="structure content"/>
+	    <span tal:replace="structure content"/>
 
     </table>
 

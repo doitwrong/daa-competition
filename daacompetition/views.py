@@ -33,7 +33,7 @@ def view_tests(request):
     username = "<b>" + request.authenticated_userid + "</b>"
     pagename = 'submit'
     edit_url = request.route_url('viewtests', pagename=pagename)
-    content='<h1> THIS CAME FROM submit() </h1>'
+    content='<tr><td> TEST1 </td></tr><tr><td> TEST2 </td></tr>'
     fn = os.path.join(os.path.dirname(__file__), 'data/users')
     with open(fn , 'r') as f:
         read_data = f.read()
