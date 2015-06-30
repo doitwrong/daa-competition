@@ -25,13 +25,13 @@ def my_view(request):
     return {'project': 'daa-competition'}
 """
 
-@view_config(route_name='submit', renderer='templates/submittask.pt',
+@view_config(route_name='viewtests', renderer='templates/viewtests.pt',
              permission='student')
-def submit(request):
-    """ logika ot stranicata za predvane na zadachi"""
-    print("SUBMIT")
+def view_tests(request):
+    """ logika ot pregleda na test rezultatite ot tekushtoto sastezanie """
+    print("USERID: ",request.authenticated_userid)
     pagename = 'submit'
-    edit_url = request.route_url('submit', pagename=pagename)
+    edit_url = request.route_url('viewtests', pagename=pagename)
     content='<h1> THIS CAME FROM submit() </h1>'
     fn = os.path.join(os.path.dirname(__file__), 'data/users')
     with open(fn , 'r') as f:
