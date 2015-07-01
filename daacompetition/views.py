@@ -38,6 +38,21 @@ def view_tests(request):
                 logged_in=request.authenticated_userid)
 
 
+@view_config(route_name='submittask', renderer='templates/submittask.pt',
+             permission='student')
+def submit_task(request):
+    """ logika predavane na zadacha """
+    pagename = 'SUBMIT TASK'
+    referrer = request.url
+    came_from = request.params.get('came_from', referrer)
+    solution = ''
+    return dict(pagename=pagename,
+                came_from=came_from,
+                url=request.application_url + '/submittask',
+                solution=solution,
+                logged_in=request.authenticated_userid)
+
+
 @view_config(route_name='login', renderer='templates/login.pt')
 @forbidden_view_config(renderer='templates/login.pt')
 def login(request):

@@ -5,10 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="tuka moje da videte rezultatite si">
-    <meta name="author" content="DAA SUBMIT TASK">
+    <meta name="author" content="VIEW SUBMITTED TASKS">
   </head>
 
   <body>
+
+    <a href="/submittask" > SUBMIT TASK </a> <br/>
 
     RESULTS FOR USERNAME: <span tal:replace="structure username"/>
 

@@ -10,9 +10,12 @@
 
   <body>
 
-	<h1> SOME PROTECTED RESOURCE </h1>
-	
-	<span tal:replace="structure content"/>
+     <form action="${url}" method="post">
+          <input type="hidden" name="came_from" value="${came_from}"/>
+          <input type="text" name="login" value="${solution}"/><br/>
+          <input type="submit" name="form.submitted" value="SUBMIT SOLUTION"/>
+     </form>
+
 	
   </body>
 </html>
