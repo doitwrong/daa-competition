@@ -29,19 +29,16 @@ def my_view(request):
              permission='student')
 def view_tests(request):
     """ logika ot pregleda na test rezultatite ot tekushtoto sastezanie """
-    print("USERID: ",request.authenticated_userid)
     username = "<b>" + request.authenticated_userid + "</b>"
     pagename = 'submit'
     edit_url = request.route_url('viewtests', pagename=pagename)
-    #content='<tr><td> TEST1 </td></tr><tr><td> TEST2 </td></tr>'
     fn = os.path.join(os.path.dirname(__file__), 'data/test_results/'+request.authenticated_userid)
-    content = ""
+    results =[]
     with open(fn , 'r') as f:
-        read_data = f.read()
-        print(read_data)
-        content += '<tr><td>' + read_data + '</td></tr>'
+        results = f.readlines()
+
     return dict(pagename=pagename,
-                content=content,
+                results=results,
                 edit_url=edit_url,
                 username = username,
                 logged_in = request.authenticated_userid )

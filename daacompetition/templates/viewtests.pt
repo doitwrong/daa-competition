@@ -14,7 +14,11 @@
 
     <table border="1">
 
-	    <span tal:replace="structure content"/>
+	    <!--<span tal:replace="structure content"/> -->
+
+	    <tr tal:repeat="row results">
+         <td tal:content="python:row">the result</td>
+        </tr>
 
     </table>
 
