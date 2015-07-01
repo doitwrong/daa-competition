@@ -19,12 +19,6 @@ from pyramid.security import (
 from .security import USERS
 
 
-"""
-@view_config(route_name='home', renderer='templates/mytemplate.pt')
-def my_view(request):
-    return {'project': 'daa-competition'}
-"""
-
 @view_config(route_name='viewtests', renderer='templates/viewtests.pt',
              permission='student')
 def view_tests(request):
@@ -33,15 +27,15 @@ def view_tests(request):
     pagename = 'submit'
     edit_url = request.route_url('viewtests', pagename=pagename)
     fn = os.path.join(os.path.dirname(__file__), 'data/test_results/'+request.authenticated_userid)
-    results =[]
-    with open(fn , 'r') as f:
+    results = []
+    with open(fn, 'r') as f:
         results = f.readlines()
 
     return dict(pagename=pagename,
                 results=results,
                 edit_url=edit_url,
-                username = username,
-                logged_in = request.authenticated_userid )
+                username=username,
+                logged_in=request.authenticated_userid)
 
 
 @view_config(route_name='login', renderer='templates/login.pt')
@@ -51,7 +45,7 @@ def login(request):
     login_url = request.route_url('login')
     referrer = request.url
     if referrer == login_url:
-        referrer = '/' # never use the login form itself as came_from
+        referrer = '/'  # never use the login form itself as came_from
     came_from = request.params.get('came_from', referrer)
     message = ''
     login = ''
@@ -61,22 +55,21 @@ def login(request):
         password = request.params['password']
         if USERS.get(login) == password:
             headers = remember(request, login)
-            return HTTPFound(location = came_from,
-                             headers = headers)
+            return HTTPFound(location=came_from,
+                             headers=headers)
         message = 'Failed login'
 
     return dict(
-        message = message,
-        url = request.application_url + '/login',
-        came_from = came_from,
-        login = login,
-        password = password,
+        message=message,
+        url=request.application_url + '/login',
+        came_from=came_from,
+        login=login,
+        password=password,
         )
+
 
 @view_config(route_name='logout')
 def logout(request):
     headers = forget(request)
-    return HTTPFound(location = request.route_url('submit'),
-                     headers = headers)
-
-
+    return HTTPFound(location=request.route_url('submit'),
+                     headers=headers)
