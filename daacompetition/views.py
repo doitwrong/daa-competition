@@ -46,6 +46,8 @@ def submit_task(request):
     referrer = request.url
     came_from = request.params.get('came_from', referrer)
     solution = ''
+    if 'form.submitted' in request.params:
+        print(request.params['solution'])
     return dict(pagename=pagename,
                 came_from=came_from,
                 url=request.application_url + '/submittask',

@@ -10,9 +10,11 @@
 
   <body>
 
-     <form action="${url}" method="post">
+
+     <textarea rows="10" cols="50" name="solution" form="submitform">${solution}</textarea>
+
+     <form action="${url}" method="post" id="submitform">
           <input type="hidden" name="came_from" value="${came_from}"/>
-          <input type="text" name="login" value="${solution}"/><br/>
           <input type="submit" name="form.submitted" value="SUBMIT SOLUTION"/>
      </form>
 
