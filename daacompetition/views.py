@@ -1,3 +1,4 @@
+__author__ = 'kaloyan'
 from pyramid.view import view_config
 import os
 
