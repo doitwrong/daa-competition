@@ -6,12 +6,9 @@ import os
 import sys
 from importlib.machinery import SourceFileLoader
 
-judge = SourceFileLoader("module.name",
-                         'generic_tests.py').load_module()
-'''
-judge = SourceFileLoader("module.name",
-                         sys.path.append(os.path.join(os.path.dirname(__file__),
-                                                      'data/generic_tests.py'))).load_module()'''
+
+judge = SourceFileLoader("module.name", os.path.join(os.path.dirname(__file__),
+                                                     'data/tests/generic_tests.py')).load_module()
 
 
 class Judge:
