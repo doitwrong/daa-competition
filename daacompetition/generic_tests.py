@@ -4,7 +4,7 @@ import unittest
 
 class JudgeTest(unittest.TestCase):
     def setUp(self):
-        print(JudgeTest)
+        print('koro')
 
     def test_something(self):
         assert True
