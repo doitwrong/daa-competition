@@ -8,7 +8,7 @@ from importlib.machinery import SourceFileLoader
 
 
 judge = SourceFileLoader("module.name", os.path.join(os.path.dirname(__file__),
-                                                     'data/tests/generic_tests.py')).load_module()
+                                                     'data/generic_tests.py')).load_module()
 
 
 class Judge:
