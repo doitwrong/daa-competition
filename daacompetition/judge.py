@@ -1,22 +1,24 @@
 __author__ = 'kaloyan'
-from unittest.case import TestCase
 import unittest
 from io import StringIO
 import os
-import sys
 from importlib.machinery import SourceFileLoader
-
 
 judge = SourceFileLoader("module.name", os.path.join(os.path.dirname(__file__),
                                                      'data/generic_tests.py')).load_module()
 
+param_test = SourceFileLoader("module.name", os.path.join(os.path.dirname(__file__),
+                                                          'util/parametrized_test.py')).load_module()
 
 class Judge:
     def run(self):
         from pprint import pprint
         stream = StringIO()
         runner = unittest.TextTestRunner(stream=stream)
-        result = runner.run(unittest.makeSuite(judge.JudgeTest))
+        suite = unittest.TestSuite()
+        suite.addTest(param_test.ParametrizedTestCase.parametrize(judge.JudgeTest, param=42333))
+        '''result = runner.run(unittest.makeSuite(judge.JudgeTest))'''
+        result = runner.run(suite)
         print('Tests run ', result.testsRun)
         print('Errors ', result.errors)
         pprint(result.failures)
