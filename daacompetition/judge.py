@@ -3,19 +3,12 @@ import unittest
 from io import StringIO
 import os
 from importlib.machinery import SourceFileLoader
-
-'''
-judge = SourceFileLoader("module.name", os.path.join(os.path.dirname(__file__),
-                                                     'generic_tests.py')).load_module()
-
-param_test = SourceFileLoader("module.name", os.path.join(os.path.dirname(__file__),
-                                                          'parametrized_test.py')).load_module()'''
-
-
 from daacompetition.data.generic_tests import JudgeTest
 from daacompetition.parametrized_test import ParametrizedTestCase
 
+
 class Judge:
+
     def run(self, username):
         '''podavash mu username-a i izplanyava code-a ot modula za tozi username'''
         from pprint import pprint
