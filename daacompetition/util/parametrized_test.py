@@ -3,8 +3,7 @@ import unittest
 
 
 class ParametrizedTestCase(unittest.TestCase):
-    """ TestCase classes that want to be parametrized should
-        inherit from this class.
+    """ TestCase classovete tryabva da nasledyavat tozi
     """
     def __init__(self, method_name='runTest', param=None):
         super(ParametrizedTestCase, self).__init__(method_name)
@@ -12,8 +11,8 @@ class ParametrizedTestCase(unittest.TestCase):
 
     @staticmethod
     def parametrize(testcase_klass, param=None):
-        """ Create a suite containing all tests taken from the given
-            subclass, passing them the parameter 'param'.
+        """ Sazdavam suite sadarjasht vsichki testove ot given
+            subclass, podavaiki im 'param'.
         """
         testloader = unittest.TestLoader()
         testnames = testloader.getTestCaseNames(testcase_klass)
