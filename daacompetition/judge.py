@@ -4,11 +4,16 @@ from io import StringIO
 import os
 from importlib.machinery import SourceFileLoader
 
+'''
 judge = SourceFileLoader("module.name", os.path.join(os.path.dirname(__file__),
-                                                     'data/generic_tests.py')).load_module()
+                                                     'generic_tests.py')).load_module()
 
 param_test = SourceFileLoader("module.name", os.path.join(os.path.dirname(__file__),
-                                                          'util/parametrized_test.py')).load_module()
+                                                          'parametrized_test.py')).load_module()'''
+
+
+from daacompetition.generic_tests import JudgeTest
+from daacompetition.parametrized_test import ParametrizedTestCase
 
 class Judge:
     def run(self):
@@ -16,7 +21,7 @@ class Judge:
         stream = StringIO()
         runner = unittest.TextTestRunner(stream=stream)
         suite = unittest.TestSuite()
-        suite.addTest(param_test.ParametrizedTestCase.parametrize(judge.JudgeTest, param=42333))
+        suite.addTest(ParametrizedTestCase.parametrize(JudgeTest, param=42333))
         '''result = runner.run(unittest.makeSuite(judge.JudgeTest))'''
         result = runner.run(suite)
         print('Tests run ', result.testsRun)
