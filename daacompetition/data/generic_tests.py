@@ -16,7 +16,7 @@ class JudgeTest(ParametrizedTestCase):
 
     def setUp(self):
         self.solution_module = SourceFileLoader("module.name", os.path.join(os.path.dirname(__file__),
-                                                                            'data/solutions/',
+                                                                            'solutions/',
                                                                             self.param + '.py')).load_module()
 
     def test_something(self):

@@ -12,7 +12,7 @@ param_test = SourceFileLoader("module.name", os.path.join(os.path.dirname(__file
                                                           'parametrized_test.py')).load_module()'''
 
 
-from daacompetition.generic_tests import JudgeTest
+from daacompetition.data.generic_tests import JudgeTest
 from daacompetition.parametrized_test import ParametrizedTestCase
 
 class Judge:
