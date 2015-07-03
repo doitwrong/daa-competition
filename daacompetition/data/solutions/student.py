@@ -1,4 +1,2 @@
-print('KORO')
-
-def dummy(tmp):
+def solution(da_set):
     return 5

@@ -50,7 +50,7 @@ def submit_task(request):
     solution = ''
     if 'form.submitted' in request.params:
         judge = Judge()
-        judge.run(request.params['solution'])
+        judge.run(request.authenticated_userid)  # request.params['solution']
     return dict(pagename=pagename,
                 came_from=came_from,
                 url=request.application_url + '/submittask',

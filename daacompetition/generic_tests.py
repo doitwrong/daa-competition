@@ -12,6 +12,12 @@ from daacompetition.parametrized_test import ParametrizedTestCase
 
 class JudgeTest(ParametrizedTestCase):
 
+    solution_module = None
+
+    def setUp(self):
+        self.solution_module = SourceFileLoader("module.name", os.path.join(os.path.dirname(__file__), 'data/solutions/',
+                                                                            self.param + '.py')).load_module()
+
     def test_something(self):
-        print(self.param)
-        assert True
+        self.assertEqual(5, self.solution_module.solution(2))
+
