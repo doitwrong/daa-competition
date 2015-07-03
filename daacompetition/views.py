@@ -19,6 +19,7 @@ from pyramid.security import (
 
 from .security import USERS
 
+from daacompetition.judge import Judge
 
 @view_config(route_name='viewtests', renderer='templates/viewtests.pt',
              permission='student')
@@ -48,7 +49,8 @@ def submit_task(request):
     came_from = request.params.get('came_from', referrer)
     solution = ''
     if 'form.submitted' in request.params:
-        print(request.params['solution'])
+        judge = Judge()
+        judge.run(request.params['solution'])
     return dict(pagename=pagename,
                 came_from=came_from,
                 url=request.application_url + '/submittask',

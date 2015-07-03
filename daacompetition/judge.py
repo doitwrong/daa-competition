@@ -16,12 +16,13 @@ from daacompetition.generic_tests import JudgeTest
 from daacompetition.parametrized_test import ParametrizedTestCase
 
 class Judge:
-    def run(self):
+    def run(self, username):
+        '''podavash mu username-a i izplanyava code-a ot modula za tozi username'''
         from pprint import pprint
         stream = StringIO()
         runner = unittest.TextTestRunner(stream=stream)
         suite = unittest.TestSuite()
-        suite.addTest(ParametrizedTestCase.parametrize(JudgeTest, param=42333))
+        suite.addTest(ParametrizedTestCase.parametrize(JudgeTest, param=username))
         '''result = runner.run(unittest.makeSuite(judge.JudgeTest))'''
         result = runner.run(suite)
         print('Tests run ', result.testsRun)
@@ -30,5 +31,3 @@ class Judge:
         stream.seek(0)
         print('Test output\n', stream.read())
 
-var = Judge()
-var.run()
