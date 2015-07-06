@@ -49,6 +49,10 @@ def submit_task(request):
     came_from = request.params.get('came_from', referrer)
     solution = ''
     if 'form.submitted' in request.params:
+        fn = os.path.join(os.path.dirname(__file__), 'data/solutions/'+request.authenticated_userid+'.py')
+        f = open(fn, 'w')
+        f.write(request.params['solution'])
+        f.close()
         judge = Judge()
         judge.run(request.authenticated_userid)  # request.params['solution']
     return dict(pagename=pagename,
