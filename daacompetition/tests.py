@@ -1,9 +1,12 @@
 import unittest
 
 from pyramid import testing
-
+from daacompetition.exceptions import SubmitTaskFailure
 
 class CommonTests(unittest.TestCase):
+    ''' tova sa unit testove za python code-a samo za code
+    (ne i za testove po resheniyata)
+    '''
 
     def setUp(self):
         self.config = testing.setUp()
@@ -25,5 +28,12 @@ class CommonTests(unittest.TestCase):
 
         # request.route_url()
         # request.route_url('login') = 'http://localhost:6543/login'
-        print("CCCCCC")
-        print(login(request))
+        # print("CCCCCC")
+        # print(login(request))
+
+    def test_submit_before(self):
+        '''dali shte vdigne greshka ako e predal predi vremetoza iztichane'''
+        from .views import submit_task
+        request = testing.DummyRequest()
+        with self.assertRaises(SubmitTaskFailure):
+            submit_task(request)
