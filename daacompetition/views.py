@@ -1,6 +1,12 @@
 __author__ = 'kaloyan'
 from pyramid.view import view_config
 import os
+from .security import USERS
+from daacompetition.judge import Judge
+from daacompetition.data.judge_configuration import TimeConfiguration
+from daacompetition.exceptions import ValidationFailure
+from pyramid.response import Response
+from datetime import datetime
 
 from pyramid.httpexceptions import (
     HTTPFound,
@@ -17,9 +23,6 @@ from pyramid.security import (
     forget,
     )
 
-from .security import USERS
-
-from daacompetition.judge import Judge
 
 @view_config(route_name='viewtests', renderer='templates/viewtests.pt',
              permission='student')
@@ -49,6 +52,9 @@ def submit_task(request):
     came_from = request.params.get('came_from', referrer)
     solution = ''
     if 'form.submitted' in request.params:
+        if datetime.now() > TimeConfiguration.expires:
+            raise ValidationFailure('MINA VREMETO ZA PREDAVENE')
+
         fn = os.path.join(os.path.dirname(__file__), 'data/solutions/'+request.authenticated_userid+'.py')
         f = open(fn, 'w')
         f.write(request.params['solution'])
@@ -97,3 +103,10 @@ def logout(request):
     headers = forget(request)
     return HTTPFound(location=request.route_url('submit'),
                      headers=headers)
+
+
+@view_config(context=ValidationFailure)
+def failed_submit(exc, request):
+    response = Response('Failed validation: %s' % exc.msg)
+    response.status_int = 500
+    return response
