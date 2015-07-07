@@ -37,3 +37,4 @@ class CommonTests(unittest.TestCase):
         request = testing.DummyRequest()
         with self.assertRaises(SubmitTaskFailure):
             submit_task(request)
+
