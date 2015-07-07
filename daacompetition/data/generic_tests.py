@@ -3,7 +3,7 @@ import unittest
 import os
 from importlib.machinery import SourceFileLoader
 from daacompetition.util.parametrized_test import ParametrizedTestCase
-from daacompetition.util.custom_decorator import timeout
+from daacompetition.util.custom_decorators import timeout
 
 class JudgeTest(ParametrizedTestCase):
 

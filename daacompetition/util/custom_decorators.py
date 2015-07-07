@@ -1,9 +1,7 @@
 __author__ = 'kaloyan'
 from functools import wraps
 from multiprocessing import Process
-
-class TimeoutError(Exception):
-    pass
+from daacompetition.exceptions import TimeoutError
 
 def timeout(seconds=5, error_message="Timeout"):
     def decorator(func):
