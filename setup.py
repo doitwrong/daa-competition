@@ -37,7 +37,7 @@ setup(name='daa-competition',
       zip_safe=False,
       install_requires=requires,
       tests_require=requires,
-      test_suite="daacompetition.tests",
+      test_suite="daacompetition.tests",  # taka runnva testove samo ot modula tests
       entry_points="""\
       [paste.app_factory]
       main = daacompetition:main
