@@ -25,6 +25,7 @@ rm ez_setup.py
 ```bash
 git clone https://github.com/doitwrong/daa-competition &&
 cd daa-competition/ &&
+$VENV/bin/python setup.py test -q &&
 $VENV/bin/python setup.py develop &&
 $VENV/bin/pserve development.ini --reload
 
