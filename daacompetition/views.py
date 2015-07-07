@@ -61,6 +61,9 @@ def submit_task(request):
         f.close()
         judge = Judge()
         judge.run(request.authenticated_userid)  # request.params['solution']
+        url = request.application_url
+        return HTTPFound(location=url)
+
     return dict(pagename=pagename,
                 came_from=came_from,
                 url=request.application_url + '/submittask',
