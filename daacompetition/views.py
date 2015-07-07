@@ -7,6 +7,7 @@ from daacompetition.data.judge_configuration import TimeConfiguration
 from daacompetition.exceptions import SubmitTaskFailure
 from pyramid.response import Response
 from datetime import datetime
+import threading
 
 from pyramid.httpexceptions import (
     HTTPFound,
@@ -59,8 +60,10 @@ def submit_task(request):
         f = open(fn, 'w')
         f.write(request.params['solution'])
         f.close()
+        # request.params['solution']
         judge = Judge()
-        judge.run(request.authenticated_userid)  # request.params['solution']
+        thread = threading.Thread(target=judge.run, args=(request.authenticated_userid,))
+        thread.start()
         url = request.application_url
         return HTTPFound(location=url)
 
