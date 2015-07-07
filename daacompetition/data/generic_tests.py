@@ -2,7 +2,7 @@ __author__ = 'kaloyan'
 import unittest
 import os
 from importlib.machinery import SourceFileLoader
-from daacompetition.parametrized_test import ParametrizedTestCase
+from daacompetition.util.parametrized_test import ParametrizedTestCase
 from daacompetition.util.custom_decorator import timeout
 
 class JudgeTest(ParametrizedTestCase):

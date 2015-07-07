@@ -4,7 +4,7 @@ from io import StringIO
 import os
 from importlib.machinery import SourceFileLoader
 from daacompetition.data.generic_tests import JudgeTest
-from daacompetition.parametrized_test import ParametrizedTestCase
+from daacompetition.util.parametrized_test import ParametrizedTestCase
 
 
 class Judge:
