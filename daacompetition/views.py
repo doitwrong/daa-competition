@@ -63,7 +63,7 @@ def submit_task(request):
         # appendvam judging preda da se izvikat testovete
         fn = os.path.join(os.path.dirname(__file__), 'data/test_results/'+request.authenticated_userid)
         f = open(fn, 'a')
-        f.write(Judge.JUDGING)
+        f.write('\n'+Judge.JUDGING)
         # puskam v thread test suite-a mi
         judge = Judge()
         thread = threading.Thread(target=judge.run, args=(request.authenticated_userid,))
