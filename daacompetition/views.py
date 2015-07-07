@@ -38,7 +38,7 @@ def view_tests(request):
         results = f.readlines()
 
     return dict(pagename=pagename,
-                results=results,
+                results=results[1:],
                 edit_url=edit_url,
                 username=username,
                 logged_in=request.authenticated_userid)
@@ -60,7 +60,11 @@ def submit_task(request):
         f = open(fn, 'w')
         f.write(request.params['solution'])
         f.close()
-        # request.params['solution']
+        # appendvam judging preda da se izvikat testovete
+        fn = os.path.join(os.path.dirname(__file__), 'data/test_results/'+request.authenticated_userid)
+        f = open(fn, 'a')
+        f.write(Judge.JUDGING)
+        # puskam v thread test suite-a mi
         judge = Judge()
         thread = threading.Thread(target=judge.run, args=(request.authenticated_userid,))
         thread.start()

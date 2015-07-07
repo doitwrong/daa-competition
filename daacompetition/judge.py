@@ -8,6 +8,7 @@ from daacompetition.util.parametrized_test import ParametrizedTestCase
 
 
 class Judge:
+    JUDGING = "\njudging..."
 
     def run(self, username):
         '''podavash mu username-a i izplanyava code-a ot modula za tozi username'''
