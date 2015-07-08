@@ -19,16 +19,21 @@ class Judge:
         suite.addTest(ParametrizedTestCase.parametrize(JudgeTest, param=username))
         result = runner.run(suite)
         print('Tests run ', result.testsRun)
-        # print('Errors ', result.errors)
-        # pprint(result.failures)
+        for v in result.errors:
+            print('\nVVVVVVVVVVVV', v)
+            for error in v:
+                print('\nDDDDDDDDDDDDD', str(error).split(' ')[0])
+
+        pprint(result.failures)
         stream.seek(0)
-        # print('Test output\n', stream.read())
+        print('Test output---------------------\n', stream.read())
         fn = os.path.join(os.path.dirname(__file__), 'data/test_results/'+username)
         file_lines = []
         with open(fn, 'r') as f:
             file_lines = f.readlines()
-        print('READED', file_lines)
         filtered = [v for v in file_lines if v != self.JUDGING]
-        print('kor', filtered)
+
+        print(runner.descriptions)
+
         f = open(fn, 'w')
         f.write(''.join(filtered))
