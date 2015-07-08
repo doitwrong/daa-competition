@@ -55,7 +55,7 @@ class Judge:
             file_lines = f.readlines()
         filtered = [v for v in file_lines if v != self.JUDGING]
 
-        str_to_append = "\n"+" ".join(test_results)
+        str_to_append = " ".join(test_results)
 
         # ako tekushtiya rezultat e po-malak ot noviya go update-vame
         number_of_oks = str_to_append.count(self.OK)
