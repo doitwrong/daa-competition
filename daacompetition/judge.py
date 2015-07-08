@@ -60,7 +60,7 @@ class Judge:
         # ako tekushtiya rezultat e po-malak ot noviya go update-vame
         number_of_oks = str_to_append.count(self.OK)
         if int(filtered[0]) < number_of_oks:
-            filtered[0] = str(number_of_oks)
+            filtered[0] = str(number_of_oks)+"\n"
 
         f = open(fn, 'w')
         filtered.append(str_to_append)
