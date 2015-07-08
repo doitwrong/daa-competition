@@ -32,9 +32,9 @@ class Judge:
                 cause = self.TL
             else:
                 cause = self.CE
+            print(test_index, cause)
 
-        for v in result.failures:
-            print(v)
+        print(result.failures)
 
         # pprint(result.failures)
         stream.seek(0)
