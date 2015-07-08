@@ -29,7 +29,7 @@ from pyramid.security import (
              permission='student')
 def view_tests(request):
     """ logika ot pregleda na test rezultatite ot tekushtoto sastezanie """
-    username = "<b>" + request.authenticated_userid + "</b>" # tova ne hubavo no sam slojil ako mi se naloji da vidya
+    username = "<b>" + request.authenticated_userid + "</b>"  # tova ne hubavo no sam slojil ako mi se naloji da vidya
     pagename = 'submit'
     edit_url = request.route_url('viewtests', pagename=pagename)
     fn = os.path.join(os.path.dirname(__file__), 'data/test_results/'+request.authenticated_userid)
