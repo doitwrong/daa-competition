@@ -56,7 +56,13 @@ class Judge:
             file_lines = f.readlines()
         filtered = [v for v in file_lines if v != self.JUDGING]
 
-        # print(runner.descriptions)
+        str_to_append = "\n"+" ".join(test_results)
+
+        # ako tekushtiya rezultat e po-malak ot noviya go update-vame
+        number_of_oks = str_to_append.count(self.OK)
+        if int(filtered[0]) < number_of_oks:
+            filtered[0] = str(number_of_oks)
 
         f = open(fn, 'w')
+        filtered.append(str_to_append)
         f.write(''.join(filtered))
