@@ -46,8 +46,6 @@ class Judge:
             test_index = self.get_method_index(v[0])
             test_results[test_index] = self.WA
 
-        print(test_results)
-
         # pprint(result.failures)
         stream.seek(0)
         # print('Test output---------------------\n', stream.read())
