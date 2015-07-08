@@ -20,20 +20,20 @@ class Judge:
         result = runner.run(suite)
         print('Tests run ', result.testsRun)
         for v in result.errors:
-            print('\nVVVVVVVVVVVV', v)
             for error in v:
                 print('\nDDDDDDDDDDDDD', str(error).split(' ')[0].split('_')[-1])
+                # print('KOROR', type(error))
 
-        pprint(result.failures)
+        # pprint(result.failures)
         stream.seek(0)
-        print('Test output---------------------\n', stream.read())
+        # print('Test output---------------------\n', stream.read())
         fn = os.path.join(os.path.dirname(__file__), 'data/test_results/'+username)
         file_lines = []
         with open(fn, 'r') as f:
             file_lines = f.readlines()
         filtered = [v for v in file_lines if v != self.JUDGING]
 
-        print(runner.descriptions)
+        # print(runner.descriptions)
 
         f = open(fn, 'w')
         f.write(''.join(filtered))
