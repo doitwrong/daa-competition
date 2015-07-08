@@ -7,6 +7,7 @@ from daacompetition.data.generic_tests import JudgeTest
 from daacompetition.util.parametrized_test import ParametrizedTestCase
 from daacompetition.exceptions import TimeoutError
 
+
 class Judge:
     JUDGING = "judging..."
     OK = "ok"
