@@ -14,6 +14,9 @@ class Judge:
     CE = "ce"
     TL = "tl"
 
+    def get_method_index(self, param):
+        return str(param).split(' ')[0].split('_')[-1]
+
     def run(self, username):
         '''podavash mu username-a i izplanyava code-a ot modula za tozi username'''
         from pprint import pprint
@@ -26,7 +29,7 @@ class Judge:
 
         # ako ima greshki znachi ili ima compilacionna greshka ili bavno reshenieto
         for v in result.errors:
-            test_index = str(v[0]).split(' ')[0].split('_')[-1]
+            test_index = self.get_method_index(v[0])
             cause = ""
             if TimeoutError.__name__ in v[1]:
                 cause = self.TL
@@ -34,7 +37,9 @@ class Judge:
                 cause = self.CE
             print(test_index, cause)
 
-        print(result.failures)
+        for v in result.failures:
+            test_index = self.get_method_index(v[0])
+            print('FAILURE:', test_index)
 
         # pprint(result.failures)
         stream.seek(0)
