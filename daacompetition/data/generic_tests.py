@@ -6,6 +6,7 @@ from daacompetition.util.parametrized_test import ParametrizedTestCase
 from daacompetition.util.custom_decorators import timeout
 
 class JudgeTest(ParametrizedTestCase):
+    '''trybva testovete da ima suffix za da razbera koi test e gramnal '''
 
     solution_module = None
 
@@ -15,7 +16,7 @@ class JudgeTest(ParametrizedTestCase):
                                                                             self.param + '.py')).load_module()
 
     @timeout(2)
-    def test_something(self):
+    def test_something_1(self):
         self.assertEqual(5, self.solution_module.solution(2))
 
     def test_kor(self):
