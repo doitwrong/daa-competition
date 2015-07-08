@@ -19,5 +19,5 @@ class JudgeTest(ParametrizedTestCase):
     def test_something_0(self):
         self.assertEqual(5, self.solution_module.solution(2))
 
-    def test_kor(self):
-        print('dasdas')
+    def test_something_1(self):
+        self.assertEqual(5, self.solution_module.solution(2))
