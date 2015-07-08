@@ -15,7 +15,7 @@ class Judge:
     TL = "tl"
 
     def get_method_index(self, param):
-        return str(param).split(' ')[0].split('_')[-1]
+        return int(str(param).split(' ')[0].split('_')[-1])
 
     def run(self, username):
         '''podavash mu username-a i izplanyava code-a ot modula za tozi username'''
@@ -27,6 +27,10 @@ class Judge:
         result = runner.run(suite)
         print('Tests run ', result.testsRun)
 
+        test_results = []
+        for v in range(result.testsRun):
+            test_results.append(self.OK)
+
         # ako ima greshki znachi ili ima compilacionna greshka ili bavno reshenieto
         for v in result.errors:
             test_index = self.get_method_index(v[0])
@@ -35,11 +39,13 @@ class Judge:
                 cause = self.TL
             else:
                 cause = self.CE
-            print(test_index, cause)
+            test_results[test_index] = cause
 
         for v in result.failures:
             test_index = self.get_method_index(v[0])
-            print('FAILURE:', test_index)
+            test_results[test_index] = self.WA
+
+        print(test_results)
 
         # pprint(result.failures)
         stream.seek(0)
