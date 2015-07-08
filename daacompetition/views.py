@@ -29,7 +29,7 @@ from pyramid.security import (
              permission='student')
 def view_tests(request):
     """ logika ot pregleda na test rezultatite ot tekushtoto sastezanie """
-    username = "<b>" + request.authenticated_userid + "</b>"
+    username = "<b>" + request.authenticated_userid + "</b>" # tova ne hubavo no sam slojil ako mi se naloji da vidya
     pagename = 'submit'
     edit_url = request.route_url('viewtests', pagename=pagename)
     fn = os.path.join(os.path.dirname(__file__), 'data/test_results/'+request.authenticated_userid)
@@ -37,11 +37,18 @@ def view_tests(request):
     with open(fn, 'r') as f:
         results = f.readlines()
 
+    progress = ''
+    if 1 < len(results):
+        progress = str(int(100 / (results[1].count(' ')+1) * int(results[0])))
+    else:
+        progress = "0"
+
     return dict(pagename=pagename,
                 results=results[1:],
                 edit_url=edit_url,
                 username=username,
-                logged_in=request.authenticated_userid)
+                logged_in=request.authenticated_userid,
+                progress=progress)
 
 
 @view_config(route_name='submittask', renderer='templates/submittask.pt',

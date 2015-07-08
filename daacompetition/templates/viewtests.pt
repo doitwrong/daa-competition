@@ -10,9 +10,10 @@
 
   <body>
 
-    <a href="/submittask" > SUBMIT TASK </a> <br/>
+    <a href="/submittask" > SUBMIT TASK </a> <br/> <br/>
 
-    RESULTS FOR USERNAME: <span tal:replace="structure username"/>
+    RESULTS FOR USERNAME: <span tal:replace="structure username"/><br/>
+    TASK SOLVED ON: <b><span tal:replace="structure progress"/>%</b>
 
     <table border="1">
 
