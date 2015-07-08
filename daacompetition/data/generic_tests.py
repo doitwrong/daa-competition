@@ -15,9 +15,9 @@ class JudgeTest(ParametrizedTestCase):
                                                                             'solutions/',
                                                                             self.param + '.py')).load_module()
 
-    @timeout(2)
+    @timeout(0.5)
     def test_something_0(self):
         self.assertEqual(5, self.solution_module.solution(2))
 
     def test_something_1(self):
-        self.assertEqual(5, self.solution_module.solution(2))
+        self.assertEqual(4, self.solution_module.solution(2))
