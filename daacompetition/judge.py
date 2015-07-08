@@ -5,10 +5,14 @@ import os
 from importlib.machinery import SourceFileLoader
 from daacompetition.data.generic_tests import JudgeTest
 from daacompetition.util.parametrized_test import ParametrizedTestCase
-
+from daacompetition.exceptions import TimeoutError
 
 class Judge:
     JUDGING = "judging..."
+    OK = "ok"
+    WA = "wa"
+    CE = "ce"
+    TL = "tl"
 
     def run(self, username):
         '''podavash mu username-a i izplanyava code-a ot modula za tozi username'''
@@ -19,10 +23,18 @@ class Judge:
         suite.addTest(ParametrizedTestCase.parametrize(JudgeTest, param=username))
         result = runner.run(suite)
         print('Tests run ', result.testsRun)
+
+        # ako ima greshki znachi ili ima compilacionna greshka ili bavno reshenieto
         for v in result.errors:
-            for error in v:
-                print('\nDDDDDDDDDDDDD', str(error).split(' ')[0].split('_')[-1])
-                # print('KOROR', type(error))
+            test_index = str(v[0]).split(' ')[0].split('_')[-1]
+            cause = ""
+            if TimeoutError.__name__ in v[1]:
+                cause = self.TL
+            else:
+                cause = self.CE
+
+        for v in result.failures:
+            print(v)
 
         # pprint(result.failures)
         stream.seek(0)
