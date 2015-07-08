@@ -22,7 +22,7 @@ class Judge:
         for v in result.errors:
             print('\nVVVVVVVVVVVV', v)
             for error in v:
-                print('\nDDDDDDDDDDDDD', str(error).split(' ')[0])
+                print('\nDDDDDDDDDDDDD', str(error).split(' ')[0].split('_')[-1])
 
         pprint(result.failures)
         stream.seek(0)
