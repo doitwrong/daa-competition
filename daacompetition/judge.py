@@ -6,7 +6,7 @@ from daacompetition.data.generic_tests import JudgeTest
 from daacompetition.util.parametrized_test import ParametrizedTestCase
 from daacompetition.exceptions import TimeoutError
 import time
-
+import operator
 
 class Judge:
     JUDGING = "judging..."
@@ -84,7 +84,11 @@ class Judge:
 
             d[username] = progress+"%\n"
             new_list = []
-            for key, value in d.items():
-                new_list.append(key+" "+value)
+
+            sorted_x = sorted(d.items(), key=operator.itemgetter(1))
+
+            new_list = []
+            for v in sorted_x:
+                new_list.append(v[0]+" "+v[1])
 
             f.write(''.join(new_list))
