@@ -9,7 +9,7 @@ from pyramid.httpexceptions import (
     )
 
 
-class CommonTests(unittest.TestCase):
+class ViewIntegrationTests(unittest.TestCase):
     ''' tova sa unit testove za python code-a samo za code
     (ne i za testove po resheniyata)
     '''
