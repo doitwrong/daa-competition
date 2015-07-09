@@ -35,3 +35,14 @@ class ViewIntegrationTests(unittest.TestCase):
         with self.assertRaises(SubmitTaskFailure):
             submit_task(request)
 
+
+class FunctionalTests(unittest.TestCase):
+    def setUp(self):
+        from daacompetition import main
+        app = main({})
+        from webtest import TestApp
+        self.testapp = TestApp(app)
+
+    def test_root(self):
+        res = self.testapp.get('/login', status=200)
+        self.assertEqual(res.body.decode("utf-8").count('<title>DAA COMPETITION LOGIN</title>'), 1)
