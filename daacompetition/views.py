@@ -8,6 +8,7 @@ from daacompetition.exceptions import SubmitTaskFailure
 from pyramid.response import Response
 from datetime import datetime
 import threading
+import re
 
 from pyramid.httpexceptions import (
     HTTPFound,
@@ -58,6 +59,8 @@ def submit_task(request):
     if datetime.now() > TimeConfiguration.expires:
         raise SubmitTaskFailure('MINA VREMETO ZA PREDAVENE')
 
+    words_to_remove = [r'\bsubprocess|eval|system\b.*\(', r'exec']
+
     pagename = 'SUBMIT TASK'
     referrer = request.url
     came_from = request.params.get('came_from', referrer)
@@ -65,7 +68,10 @@ def submit_task(request):
     if 'form.submitted' in request.params:
         fn = os.path.join(os.path.dirname(__file__), 'data/solutions/'+request.authenticated_userid+'.py')
         f = open(fn, 'w')
-        f.write(request.params['solution'])
+        raw_input = request.params['solution']
+        for v in words_to_remove:
+            raw_input = re.sub(v, '', raw_input)
+        f.write(raw_input)
         f.close()
         # appendvam judging preda da se izvikat testovete
         fn = os.path.join(os.path.dirname(__file__), 'data/test_results/'+request.authenticated_userid)
