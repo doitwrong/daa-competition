@@ -76,14 +76,23 @@ class Judge:
                 time.sleep(time_to_sleep)
             # f = open(fn, os.R_OK | os.W_OK)
             f = open(fn, 'r+')
-
             lines = f.readlines()
+
+            print('LINES', lines)
 
             d = {}
             for line in lines:
                 (key, val) = line.split(' ')
                 d[key] = val
 
-            print('STUDENT:', d['student'])
+            d[username] = progress+"%\n"
+
+            print('DICT', d)
+
+            new_list = []
+            for key, value in d.items():
+                new_list.append(key+value)
+
+            f.write(''.join(new_list))
 
 
