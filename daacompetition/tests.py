@@ -26,7 +26,7 @@ class CommonTests(unittest.TestCase):
         request = testing.DummyRequest({'form.submitted': True})
         request.params['login'] = 'student'
         request.params['password'] = 'student'
-        self.assertEqual(login(request).status_code, 302)
+        self.assertEqual(login(request).status, '302 Found')
 
     def test_submit_before(self):
         '''dali shte vdigne greshka ako e predal predi vremetoza iztichane'''
