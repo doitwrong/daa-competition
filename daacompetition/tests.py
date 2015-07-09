@@ -3,6 +3,12 @@ import unittest
 from pyramid import testing
 from daacompetition.exceptions import SubmitTaskFailure
 
+from pyramid.httpexceptions import (
+    HTTPFound,
+    HTTPNotFound,
+    )
+
+
 class CommonTests(unittest.TestCase):
     ''' tova sa unit testove za python code-a samo za code
     (ne i za testove po resheniyata)
@@ -10,26 +16,17 @@ class CommonTests(unittest.TestCase):
 
     def setUp(self):
         self.config = testing.setUp()
+        self.config.add_route("login", "http://localhost:6543/login")
 
     def tearDown(self):
         testing.tearDown()
 
     def test_login(self):
-        # TODO toya test ne raboti
-
-        # from .views import my_view
-        # request = testing.DummyRequest()
-        # info = my_view(request)
-        # self.assertEqual(info['project'], 'daa-competition')
         from .views import login
-        request = testing.DummyRequest()
+        request = testing.DummyRequest({'form.submitted': True})
         request.params['login'] = 'student'
         request.params['password'] = 'student'
-
-        # request.route_url()
-        # request.route_url('login') = 'http://localhost:6543/login'
-        # print("CCCCCC")
-        # print(login(request))
+        self.assertEqual(login(request).status_code, 302)
 
     def test_submit_before(self):
         '''dali shte vdigne greshka ako e predal predi vremetoza iztichane'''
