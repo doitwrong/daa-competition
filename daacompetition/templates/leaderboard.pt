@@ -10,8 +10,7 @@
 
   <body>
 
-    <a href="/submittask" > SUBMIT TASK </a> |
-    <a href="/" > VIEW MY TESTS </a> <br/> <br/>
+    LEADERBOARD:<br/><br/>
 
     <table border="1">
 
