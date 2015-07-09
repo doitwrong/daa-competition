@@ -134,6 +134,7 @@ def failed_submit(exc, request):
     response.status_int = 500
     return response
 
+
 @view_config(route_name='leaderboard', renderer='templates/leaderboard.pt')
 def leaderboard(request):
     fn = os.path.join(os.path.dirname(__file__), 'data/leaderboard')
