@@ -11,7 +11,7 @@
   <body>
 
     <a href="/submittask" > SUBMIT TASK </a> |
-    <a href="/viewtests" > VIEW MY TESTS </a> <br/> <br/>
+    <a href="/" > VIEW MY TESTS </a> <br/> <br/>
 
     <table border="1">
 
