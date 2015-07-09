@@ -44,5 +44,5 @@ class FunctionalTests(unittest.TestCase):
         self.testapp = TestApp(app)
 
     def test_root(self):
-        res = self.testapp.get('/login', status=200)
-        self.assertEqual(res.body.decode("utf-8").count('<title>DAA COMPETITION LOGIN</title>'), 1)
+        res = self.testapp.get('/leaderboard', status=200)
+        self.assertEqual(res.body.decode("utf-8").count('<title>LEADERBOARD</title>'), 1)
