@@ -2,10 +2,10 @@ __author__ = 'kaloyan'
 import unittest
 from io import StringIO
 import os
-from importlib.machinery import SourceFileLoader
 from daacompetition.data.generic_tests import JudgeTest
 from daacompetition.util.parametrized_test import ParametrizedTestCase
 from daacompetition.exceptions import TimeoutError
+import time
 
 
 class Judge:
@@ -65,3 +65,25 @@ class Judge:
         f = open(fn, 'w')
         filtered.append(str_to_append)
         f.write(''.join(filtered))
+
+        # TUKA POLZVAM os.access koeto mai samo za unix raboti
+        progress = ''
+        if 1 < len(filtered):
+            progress = str(int(100 / (filtered[1].count(' ')+1) * int(filtered[0])))
+            fn = os.path.join(os.path.dirname(__file__), 'data/leaderboard')
+            time_to_sleep = 0.5
+            while not os.access(fn, os.R_OK | os.W_OK):
+                time.sleep(time_to_sleep)
+            # f = open(fn, os.R_OK | os.W_OK)
+            f = open(fn, 'r+')
+
+            lines = f.readlines()
+
+            d = {}
+            for line in lines:
+                (key, val) = line.split(' ')
+                d[key] = val
+
+            print('STUDENT:', d['student'])
+
+
