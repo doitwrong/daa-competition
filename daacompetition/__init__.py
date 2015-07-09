@@ -20,5 +20,6 @@ def main(global_config, **settings):
     config.add_route('submittask', '/submittask')
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
+    config.add_route('leaderboard', '/leaderboard')
     config.scan()
     return config.make_wsgi_app()
