@@ -152,11 +152,8 @@ def leaderboard(request):
 @view_config(route_name='register', renderer='templates/register.pt')
 def register(request):
     register_url = request.route_url('register')
-    message = ''
     came_from = request.params.get('came_from', register_url)
-    register = ''
-    password = ''
-    repassword = ''
+    register, password, repassword, message = ["", "", "", ""]
     if 'form.submitted' in request.params:
 
         if request.params['password'] != request.params['repassword']:
