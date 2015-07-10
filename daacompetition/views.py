@@ -147,3 +147,27 @@ def leaderboard(request):
         results = f.readlines()
     return dict(results=results,
                 )
+
+
+@view_config(route_name='register', renderer='templates/register.pt')
+def register(request):
+    register_url = request.route_url('register')
+    message = ''
+    came_from = request.params.get('came_from', register_url)
+    register = ''
+    password = ''
+    repassword = ''
+    if 'form.submitted' in request.params:
+
+        if request.params['password'] != request.params['repassword']:
+            message = 'PAROLITE NE SAVPADAT'
+
+        fn = os.path.join(os.path.dirname(__file__), 'data/users')
+
+    return dict(message=message,
+                url=request.application_url + '/register',
+                came_from=came_from,
+                register=register,
+                password=password,
+                repassword=repassword,
+                )

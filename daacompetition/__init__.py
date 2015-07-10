@@ -21,5 +21,6 @@ def main(global_config, **settings):
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
     config.add_route('leaderboard', '/leaderboard')
+    config.add_route('register', '/register')
     config.scan()
     return config.make_wsgi_app()
