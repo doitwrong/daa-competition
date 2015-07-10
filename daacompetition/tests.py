@@ -2,7 +2,7 @@ import unittest
 
 from pyramid import testing
 from daacompetition.exceptions import SubmitTaskFailure
-from daacompetition.constants import Register
+from daacompetition.constants import Register, Login
 
 from pyramid.httpexceptions import (
     HTTPFound,
@@ -31,6 +31,13 @@ class ViewIntegrationTests(unittest.TestCase):
         request.params['login'] = 'student'
         request.params['password'] = 'student'
         self.assertEqual(login(request).status, '302 Found')
+
+    def test_bad_login(self):
+        from .views import login
+        request = testing.DummyRequest({'form.submitted': True})
+        request.params['login'] = 'student'
+        request.params['password'] = 'student1'
+        self.assertEqual(login(request)['message'], Login.LOGIN_FAILED.value)
 
     def test_submit_before(self):
         '''dali shte vdigne greshka ako e predal predi vremetoza iztichane'''

@@ -7,3 +7,6 @@ class Register(Enum):
     PASSWORDS_NOT_MATCH = 'PAROLITE NE SAVPADAT'
     ALLOWED_CHARACTERS = 'USERNAME-a moje da sadarja samo slednite: _ [0-9] [a-z] [A-Z]'
     USERNAME_EXISTS = 'IMA VECHE TAKAV POTREBITEl'
+
+class Login(Enum):
+    LOGIN_FAILED = 'Failed login'

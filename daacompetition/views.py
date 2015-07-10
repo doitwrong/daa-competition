@@ -9,7 +9,7 @@ from pyramid.response import Response
 from datetime import datetime
 import threading
 import re
-from daacompetition.constants import Register
+from daacompetition.constants import Register, Login
 
 from pyramid.httpexceptions import (
     HTTPFound,
@@ -115,7 +115,7 @@ def login(request):
             headers = remember(request, login)
             return HTTPFound(location=came_from,
                              headers=headers)
-        message = 'Failed login'
+        message = Login.LOGIN_FAILED.value
 
     return dict(
         message=message,
