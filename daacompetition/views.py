@@ -209,9 +209,11 @@ def register(request):
                               'data/solutions/'
                               + request.params['username']+'.py'), 'a').close()
 
-            open(os.path.join(os.path.dirname(__file__),
-                              'data/test_results/'
-                              + request.params['username']), 'a').close()
+            fn = open(os.path.join(os.path.dirname(__file__),
+                                   'data/test_results/'
+                                   + request.params['username']), 'a')
+            fn.write("0")
+            fn.close()
 
         break
 
