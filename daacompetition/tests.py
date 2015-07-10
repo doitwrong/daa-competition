@@ -12,7 +12,8 @@ from pyramid.httpexceptions import (
 
 class ViewIntegrationTests(unittest.TestCase):
     ''' tova sa unit testove za python code-a samo za code
-    (ne i za testove po resheniyata)
+    (ne i za testove po resheniyata) tova tuka polzva mock obekti
+    za se narichat integration
     '''
 
     def setUp(self):
