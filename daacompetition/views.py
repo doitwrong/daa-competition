@@ -75,14 +75,12 @@ def submit_task(request):
                 raise SubmitTaskFailure('MISCHIEVOUS PIECE OF CODE^^: ' + matched.group(0))
 
         fn = os.path.join(os.path.dirname(__file__), 'data/solutions/'+request.authenticated_userid+'.py')
-        f = open(fn, 'w')
-        f.write(raw_input)
-        f.close()
+        with open(fn, 'w') as f:
+            f.write(raw_input)
         # appendvam judging preda da se izvikat testovete
         fn = os.path.join(os.path.dirname(__file__), 'data/test_results/'+request.authenticated_userid)
-        f = open(fn, 'a')
-        f.write('\n'+Judge.JUDGING)
-        f.close()
+        with open(fn, 'a') as f:
+            f.write('\n'+Judge.JUDGING)
         # puskam v thread test suite-a mi
         judge = Judge()
         thread = threading.Thread(target=judge.run, args=(request.authenticated_userid,))
@@ -192,28 +190,24 @@ def register(request):
             with open(fn, 'a') as f:
                 f.write("\n"+request.params['username']+" "
                         + request.params['password'])
-                f.close()
 
             fn = os.path.join(os.path.dirname(__file__), 'data/leaderboard')
             with open(fn, 'a') as f:
                 f.write(request.params['username']+" 0%")
-                f.close()
 
             fn = os.path.join(os.path.dirname(__file__), 'data/users_permissions')
             with open(fn, 'a') as f:
                 f.write("\n"+request.params['username']+" "
                         + STUDENTS_GROUP)
-                f.close()
 
             with open(os.path.join(
                     os.path.dirname(__file__), 'data/solutions/' + request.params['username'] + '.py'), 'a') as f:
                 f.close()
 
-            fn = open(os.path.join(os.path.dirname(__file__),
+            with open(os.path.join(os.path.dirname(__file__),
                                    'data/test_results/'
-                                   + request.params['username']), 'a')
-            fn.write("0")
-            fn.close()
+                                   + request.params['username']), 'a') as f:
+                f.write("0")
 
         break
 
