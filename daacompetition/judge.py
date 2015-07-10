@@ -65,6 +65,7 @@ class Judge:
         f = open(fn, 'w')
         filtered.append(str_to_append)
         f.write(''.join(filtered))
+        f.close()
 
         # TUKA POLZVAM os.access koeto mai samo za unix raboti
         progress = ''
@@ -92,3 +93,4 @@ class Judge:
                 new_list.append(v[0]+" "+v[1])
 
             f.write(''.join(new_list))
+            f.close()
