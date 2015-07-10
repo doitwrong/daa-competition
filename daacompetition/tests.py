@@ -2,6 +2,7 @@ import unittest
 
 from pyramid import testing
 from daacompetition.exceptions import SubmitTaskFailure
+from daacompetition.constants import Register
 
 from pyramid.httpexceptions import (
     HTTPFound,
@@ -63,7 +64,7 @@ class ViewIntegrationTests(unittest.TestCase):
         request.params['username'] = None
         request.params['password'] = 'dsadas'
         request.params['repassword'] = None
-        print(register(request))
+        self.assertEqual(register(request)['message'], Register.ALL_FIELDS_REQ.value)
 
 
 class FunctionalTests(unittest.TestCase):
