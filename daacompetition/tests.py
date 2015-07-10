@@ -32,6 +32,17 @@ class ViewIntegrationTests(unittest.TestCase):
         '''dali shte vdigne greshka ako e predal predi vremetoza iztichane'''
         from .views import submit_task
         request = testing.DummyRequest()
+        # with self.assertRaises(SubmitTaskFailure):
+        # submit_task(request)
+
+    def test_catch_mischievous_input(self):
+        test_code = "import subprocess" \
+                    "def solution(da_set):" \
+                    "    subprocess.call('ls', shell=True)" \
+                    "        return 5"
+        from .views import submit_task
+        request = testing.DummyRequest({'form.submitted': True})
+        request.params['solution'] = test_code
         with self.assertRaises(SubmitTaskFailure):
             submit_task(request)
 
