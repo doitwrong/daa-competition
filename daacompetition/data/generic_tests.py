@@ -17,8 +17,8 @@ class JudgeTest(ParametrizedTestCase):
 
     @timeout(0.5)
     def test_something_0(self):
-        self.assertEqual(8, self.solution_module.solution(4))
+        self.assertEqual(4, self.solution_module.solution(8))
 
     @timeout(1)
     def test_something_1(self):
-        self.assertEqual(4, self.solution_module.solution(2))
+        self.assertEqual(2, self.solution_module.solution(4))
