@@ -54,7 +54,7 @@ class ViewIntegrationTests(unittest.TestCase):
         from .views import submit_task
         request = testing.DummyRequest({'form.submitted': True})
         request.params['solution'] = test_code
-        print(submit_task(request).status)
+        self.assertEqual(submit_task(request).status, '302 Found')
 
 
 class FunctionalTests(unittest.TestCase):
