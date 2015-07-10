@@ -160,10 +160,19 @@ def register(request):
     while True:
         if 'form.submitted' in request.params:
 
+            if not request.params['username'] or \
+                    not request.params['password'] or \
+                    not request.params['repassword']:
+                        message = 'VSICHKI POLETA SA ZADALJITELNI'
+                        break
+
             if request.params['password'] != request.params['repassword']:
                 message = 'PAROLITE NE SAVPADAT'
                 break
-            # TODO validaciya za daljina, regex za bukvi,_,chisla
+
+            if not re.search(r'^[a-z0-9_]+$', request.params['username']):
+                message = 'USERNAME-a moje da sadarja samo slednite: _ [0-9] [a-z] [A-Z]'
+                break
 
             fn = os.path.join(os.path.dirname(__file__), 'data/users')
             f = open(fn, 'r')
