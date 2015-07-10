@@ -150,6 +150,7 @@ def leaderboard(request):
 
 STUDENTS_GROUP = "group:students"
 
+
 @view_config(route_name='register', renderer='templates/register.pt')
 def register(request):
     register_url = request.route_url('register')
@@ -188,11 +189,19 @@ def register(request):
             f.write(request.params['username']+" 0%")
             f.close()
 
-            fn = os.path.join(os.path.dirname(__file__), 'data/user_permissions')
+            fn = os.path.join(os.path.dirname(__file__), 'data/users_permissions')
             f = open(fn, 'a')
             f.write("\n"+request.params['username']+" "
                     + STUDENTS_GROUP)
             f.close()
+
+            open(os.path.join(os.path.dirname(__file__),
+                              'data/solutions/'
+                              + request.params['username']+'.py'), 'a').close()
+
+            open(os.path.join(os.path.dirname(__file__),
+                              'data/test_results/'
+                              + request.params['username']), 'a').close()
 
         break
 
