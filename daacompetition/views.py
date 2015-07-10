@@ -59,18 +59,22 @@ def submit_task(request):
     if datetime.now() > TimeConfiguration.expires:
         raise SubmitTaskFailure('MINA VREMETO ZA PREDAVENE')
 
-    words_to_remove = [r'\bsubprocess|eval|system\b.*\(', r'exec']
+    blacklisted = [r'\bsubprocess|eval|system\b.*\(', r'exec']
 
     pagename = 'SUBMIT TASK'
     referrer = request.url
     came_from = request.params.get('came_from', referrer)
     solution = ''
     if 'form.submitted' in request.params:
+        raw_input = request.params['solution']
+        for v in blacklisted:
+            # raw_input = re.sub(v, '', raw_input)
+            matched = re.search(v, raw_input)
+            if matched:
+                raise SubmitTaskFailure('MISCHIEVOUS PIECE OF CODE^^: ' + matched.group(0))
+
         fn = os.path.join(os.path.dirname(__file__), 'data/solutions/'+request.authenticated_userid+'.py')
         f = open(fn, 'w')
-        raw_input = request.params['solution']
-        for v in words_to_remove:
-            raw_input = re.sub(v, '', raw_input)
         f.write(raw_input)
         f.close()
         # appendvam judging preda da se izvikat testovete
