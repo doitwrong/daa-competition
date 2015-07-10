@@ -17,6 +17,7 @@ class ViewIntegrationTests(unittest.TestCase):
     def setUp(self):
         self.config = testing.setUp()
         self.config.add_route("login", "http://localhost:6543/login")
+        self.config.add_route("register", "http://localhost:6543/register")
         self.config.testing_securitypolicy(userid='student',
                                            permissive=True)
 
@@ -41,7 +42,7 @@ class ViewIntegrationTests(unittest.TestCase):
         test_code = "import subprocess\n" \
                     "def solution(da_set):\n" \
                     "    subprocess.call('ls', shell=True)\n" \
-                    "        return 5"
+                    "        return da_set/2"
         from .views import submit_task
         request = testing.DummyRequest({'form.submitted': True})
         request.params['solution'] = test_code
@@ -50,11 +51,19 @@ class ViewIntegrationTests(unittest.TestCase):
 
     def test_good_input(self):
         test_code = "def solution(da_set):\n" \
-                    "    return 5"
+                    "    return da_set/2"
         from .views import submit_task
         request = testing.DummyRequest({'form.submitted': True})
         request.params['solution'] = test_code
         self.assertEqual(submit_task(request).status, '302 Found')
+
+    def test_reg_empty_field(self):
+        from .views import register
+        request = testing.DummyRequest({'form.submitted': True})
+        request.params['username'] = None
+        request.params['password'] = None
+        request.params['repassword'] = None
+        print(register(request))
 
 
 class FunctionalTests(unittest.TestCase):
