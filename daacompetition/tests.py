@@ -66,6 +66,14 @@ class ViewIntegrationTests(unittest.TestCase):
         request.params['repassword'] = None
         self.assertEqual(register(request)['message'], Register.ALL_FIELDS_REQ.value)
 
+    def test_reg_username_exists(self):
+        from .views import register
+        request = testing.DummyRequest({'form.submitted': True})
+        request.params['username'] = "student"
+        request.params['password'] = 'dsadas'
+        request.params['repassword'] = "dsadas"
+        self.assertEqual(register(request)['message'], Register.USERNAME_EXISTS.value)
+
 
 class FunctionalTests(unittest.TestCase):
     def setUp(self):
