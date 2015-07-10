@@ -27,7 +27,6 @@ class Judge:
         suite = unittest.TestSuite()
         suite.addTest(ParametrizedTestCase.parametrize(JudgeTest, param=username))
         result = runner.run(suite)
-        print('Tests run ', result.testsRun)
 
         test_results = []
         for v in range(result.testsRun):
