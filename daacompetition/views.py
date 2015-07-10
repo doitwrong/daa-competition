@@ -184,7 +184,7 @@ def register(request):
                 users[key] = val
 
             if request.params['username'] in users:
-                message = 'IMVA VECHE TAKAV POTREBITEl'
+                message = 'IMA VECHE TAKAV POTREBITEl'
                 break
 
             fn = os.path.join(os.path.dirname(__file__), 'data/users')
