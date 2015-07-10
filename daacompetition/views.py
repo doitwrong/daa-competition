@@ -172,9 +172,15 @@ def register(request):
                 (key, val) = line.split(' ')
                 users[key] = val
 
-            if users[request.params['username']]:
+            if request.params['username'] in users:
                 message = 'IMVA VECHE TAKAV POTREBITEl'
                 break
+
+            fn = os.path.join(os.path.dirname(__file__), 'data/users')
+            f = open(fn, 'a')
+            f.write("\n"+request.params['password']+" "
+                    + request.params['password'])
+            f.close()
 
         break
 
