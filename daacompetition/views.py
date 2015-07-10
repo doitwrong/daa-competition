@@ -163,6 +163,12 @@ def register(request):
             message = 'PAROLITE NE SAVPADAT'
 
         fn = os.path.join(os.path.dirname(__file__), 'data/users')
+        f = open(fn, 'r')
+        lines = f.readlines()
+        users = {}
+        for line in lines:
+            (key, val) = line.split(' ')
+            users[key] = val
 
     return dict(message=message,
                 url=request.application_url + '/register',
