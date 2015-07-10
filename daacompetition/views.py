@@ -1,7 +1,7 @@
 __author__ = 'kaloyan'
 from pyramid.view import view_config
 import os
-from .security import USERS
+from .security import get_users
 from daacompetition.judge import Judge
 from daacompetition.data.judge_configuration import TimeConfiguration
 from .exceptions import DAAException, SubmitTaskFailure
@@ -110,7 +110,7 @@ def login(request):
     if 'form.submitted' in request.params:
         login = request.params['login']
         password = request.params['password']
-        if USERS.get(login) == password:
+        if get_users().get(login) == password:
             headers = remember(request, login)
             return HTTPFound(location=came_from,
                              headers=headers)
