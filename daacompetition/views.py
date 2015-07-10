@@ -4,7 +4,7 @@ import os
 from .security import USERS
 from daacompetition.judge import Judge
 from daacompetition.data.judge_configuration import TimeConfiguration
-from daacompetition.exceptions import SubmitTaskFailure
+from .exceptions import DAAException, SubmitTaskFailure
 from pyramid.response import Response
 from datetime import datetime
 import threading
@@ -127,9 +127,9 @@ def logout(request):
                      headers=headers)
 
 
-@view_config(context=SubmitTaskFailure)
-def failed_submit(exc, request):
-    response = Response('Failed validation: %s' % exc.msg)
+@view_config(context=DAAException)
+def exception_handler(exc, request):
+    response = Response('Caught exception: %s' % exc.msg)
     response.status_int = 500
     return response
 
