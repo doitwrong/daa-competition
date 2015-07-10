@@ -148,6 +148,7 @@ def leaderboard(request):
     return dict(results=results,
                 )
 
+STUDENTS_GROUP = "group:students"
 
 @view_config(route_name='register', renderer='templates/register.pt')
 def register(request):
@@ -178,8 +179,19 @@ def register(request):
 
             fn = os.path.join(os.path.dirname(__file__), 'data/users')
             f = open(fn, 'a')
-            f.write("\n"+request.params['password']+" "
+            f.write("\n"+request.params['username']+" "
                     + request.params['password'])
+            f.close()
+
+            fn = os.path.join(os.path.dirname(__file__), 'data/leaderboard')
+            f = open(fn, 'a')
+            f.write(request.params['username']+" 0%")
+            f.close()
+
+            fn = os.path.join(os.path.dirname(__file__), 'data/user_permissions')
+            f = open(fn, 'a')
+            f.write("\n"+request.params['username']+" "
+                    + STUDENTS_GROUP)
             f.close()
 
         break
