@@ -34,7 +34,7 @@
                  value="${password}"/><br/>
           <input type="password" name="repassword"
                  value="${repassword}"/><br/>
-          <input type="submit" name="form.submitted" value="Log In"/>
+          <input type="submit" name="form.submitted" value="register"/>
         </form>
       </div>
     </div>
