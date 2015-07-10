@@ -9,6 +9,7 @@ from pyramid.response import Response
 from datetime import datetime
 import threading
 import re
+from daacompetition.constants import Register
 
 from pyramid.httpexceptions import (
     HTTPFound,
@@ -163,15 +164,15 @@ def register(request):
             if not request.params['username'] or \
                     not request.params['password'] or \
                     not request.params['repassword']:
-                        message = 'VSICHKI POLETA SA ZADALJITELNI'
+                        message = Register.ALL_FIELDS_REQ.value
                         break
 
             if request.params['password'] != request.params['repassword']:
-                message = 'PAROLITE NE SAVPADAT'
+                message = Register.PASSWORDS_NOT_MATCH.value
                 break
 
             if not re.search(r'^[a-z0-9_]+$', request.params['username']):
-                message = 'USERNAME-a moje da sadarja samo slednite: _ [0-9] [a-z] [A-Z]'
+                message = Register.ALLOWED_CHARACTERS.value
                 break
 
             fn = os.path.join(os.path.dirname(__file__), 'data/users')
@@ -184,7 +185,7 @@ def register(request):
                 users[key] = val
 
             if request.params['username'] in users:
-                message = 'IMA VECHE TAKAV POTREBITEl'
+                message = Register.USERNAME_EXISTS.value
                 break
 
             fn = os.path.join(os.path.dirname(__file__), 'data/users')
