@@ -61,7 +61,7 @@ class ViewIntegrationTests(unittest.TestCase):
         from .views import register
         request = testing.DummyRequest({'form.submitted': True})
         request.params['username'] = None
-        request.params['password'] = None
+        request.params['password'] = 'dsadas'
         request.params['repassword'] = None
         print(register(request))
 
