@@ -17,6 +17,8 @@ class ViewIntegrationTests(unittest.TestCase):
     def setUp(self):
         self.config = testing.setUp()
         self.config.add_route("login", "http://localhost:6543/login")
+        self.config.testing_securitypolicy(userid='student',
+                                           permissive=True)
 
     def tearDown(self):
         testing.tearDown()
@@ -36,15 +38,23 @@ class ViewIntegrationTests(unittest.TestCase):
         # submit_task(request)
 
     def test_catch_mischievous_input(self):
-        test_code = "import subprocess" \
-                    "def solution(da_set):" \
-                    "    subprocess.call('ls', shell=True)" \
+        test_code = "import subprocess\n" \
+                    "def solution(da_set):\n" \
+                    "    subprocess.call('ls', shell=True)\n" \
                     "        return 5"
         from .views import submit_task
         request = testing.DummyRequest({'form.submitted': True})
         request.params['solution'] = test_code
         with self.assertRaises(SubmitTaskFailure):
             submit_task(request)
+
+    def test_good_input(self):
+        test_code = "def solution(da_set):\n" \
+                    "    return 5"
+        from .views import submit_task
+        request = testing.DummyRequest({'form.submitted': True})
+        request.params['solution'] = test_code
+        print(submit_task(request).status)
 
 
 class FunctionalTests(unittest.TestCase):
