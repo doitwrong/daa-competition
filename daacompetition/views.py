@@ -153,20 +153,30 @@ def leaderboard(request):
 def register(request):
     register_url = request.route_url('register')
     came_from = request.params.get('came_from', register_url)
-    register, password, repassword, message = ["", "", "", ""]
-    if 'form.submitted' in request.params:
+    register, password, repassword, message, username = ["", "", "", "", ""]
 
-        if request.params['password'] != request.params['repassword']:
-            message = 'PAROLITE NE SAVPADAT'
+    while True:
+        if 'form.submitted' in request.params:
 
-        fn = os.path.join(os.path.dirname(__file__), 'data/users')
-        f = open(fn, 'r')
-        lines = f.readlines()
-        f.close()
-        users = {}
-        for line in lines:
-            (key, val) = line.split(' ')
-            users[key] = val
+            if request.params['password'] != request.params['repassword']:
+                message = 'PAROLITE NE SAVPADAT'
+                break
+            # TODO validaciya za daljina, regex za bukvi,_,chisla
+
+            fn = os.path.join(os.path.dirname(__file__), 'data/users')
+            f = open(fn, 'r')
+            lines = f.readlines()
+            f.close()
+            users = {}
+            for line in lines:
+                (key, val) = line.split(' ')
+                users[key] = val
+
+            if users[request.params['username']]:
+                message = 'IMVA VECHE TAKAV POTREBITEl'
+                break
+
+        break
 
     return dict(message=message,
                 url=request.application_url + '/register',
@@ -174,4 +184,5 @@ def register(request):
                 register=register,
                 password=password,
                 repassword=repassword,
+                username=username,
                 )
