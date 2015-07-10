@@ -165,6 +165,7 @@ def register(request):
         fn = os.path.join(os.path.dirname(__file__), 'data/users')
         f = open(fn, 'r')
         lines = f.readlines()
+        f.close()
         users = {}
         for line in lines:
             (key, val) = line.split(' ')
