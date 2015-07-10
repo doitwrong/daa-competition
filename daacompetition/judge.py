@@ -8,6 +8,7 @@ from daacompetition.exceptions import TimeoutError
 import time
 import operator
 
+
 class Judge:
     JUDGING = "judging..."
     OK = "ok"
