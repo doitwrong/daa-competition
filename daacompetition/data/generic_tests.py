@@ -22,3 +22,11 @@ class JudgeTest(ParametrizedTestCase):
     @timeout(1)
     def test_something_1(self):
         self.assertEqual(2, self.solution_module.solution(4))
+
+    @timeout(1)
+    def test_something_2(self):
+        self.assertEqual(6, self.solution_module.solution(12))
+
+    @timeout(1)
+    def test_something_3(self):
+        self.assertEqual(5, self.solution_module.solution(10))
