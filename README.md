@@ -9,7 +9,6 @@
 #Quick Pyramid installation
 
 ```bash
-python3.4 -c 'import setuptools' &&
 wget https://raw.githubusercontent.com/doitwrong/daa-competition/master/requirements/ez_setup.py &&
 python3.4 ez_setup.py &&
 easy_install virtualenv &&
