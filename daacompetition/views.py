@@ -210,7 +210,7 @@ def register(request):
             with open(os.path.join(os.path.dirname(__file__),
                                    'data/test_results/' + request.params['username']), 'a') as f:
                 f.write("0")
-
+            message = Register.SUCCESSFUL_REGISTRATION.value
         break
 
     return dict(message=message,
