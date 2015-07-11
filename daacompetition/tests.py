@@ -4,6 +4,7 @@ from pyramid import testing
 from daacompetition.exceptions import SubmitTaskFailure
 from daacompetition.constants import Register, Login
 import os
+import time
 
 from pyramid.httpexceptions import (
     HTTPFound,
@@ -31,18 +32,9 @@ class ViewIntegrationTests(unittest.TestCase):
         with open(fn, 'r') as f:
             cls.leaderboard_data = f.read()
 
-    def setUp(self):
-        self.config = testing.setUp()
-        self.config.add_route("login", "http://localhost:6543/login")
-        self.config.add_route("register", "http://localhost:6543/register")
-        self.config.testing_securitypolicy(userid='student',
-                                           permissive=True)
-
-    def tearDown(self):
-        testing.tearDown()
-
     @classmethod
     def tearDownClass(cls):
+        time.sleep(1)
         fn = os.path.join(os.path.dirname(__file__), 'data/test_results/student')
         with open(fn, 'w') as f:
             f.write(cls.results_data)
@@ -54,6 +46,17 @@ class ViewIntegrationTests(unittest.TestCase):
         fn = os.path.join(os.path.dirname(__file__), 'data/leaderboard')
         with open(fn, 'w') as f:
             f.write(cls.leaderboard_data)
+
+    def setUp(self):
+        self.config = testing.setUp()
+        self.config.add_route("login", "http://localhost:6543/login")
+        self.config.add_route("register", "http://localhost:6543/register")
+        self.config.add_route("viewtests", "http://localhost:6543/viewtests")
+        self.config.testing_securitypolicy(userid='student',
+                                           permissive=True)
+
+    def tearDown(self):
+        testing.tearDown()
 
     def test_login(self):
         from .views import login
@@ -140,6 +143,12 @@ class ViewIntegrationTests(unittest.TestCase):
         request.params['solution'] = None
         with self.assertRaises(SubmitTaskFailure):
             submit_task(request)
+
+    def test_add_new_solution(self):
+        from .views import view_tests, submit_task
+        request = testing.DummyRequest()
+        reponse = view_tests(request)
+        print(reponse['results'])
 
 
 class FunctionalTests(unittest.TestCase):
