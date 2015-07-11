@@ -3,6 +3,7 @@ import unittest
 from pyramid import testing
 from daacompetition.exceptions import SubmitTaskFailure
 from daacompetition.constants import Register, Login
+import os
 
 from pyramid.httpexceptions import (
     HTTPFound,
@@ -43,9 +44,16 @@ class ViewIntegrationTests(unittest.TestCase):
     def test_submit_before(self):
         '''dali shte vdigne greshka ako e predal predi vremetoza iztichane'''
         from .views import submit_task
+        fake_conf = 'start_date|Jul 7 2015  9:30AM\nduration|3\n'
+        original_conf = 'start_date|Jul 7 2015  9:30AM\nduration|300\n'
+        fn = os.path.join(os.path.dirname(__file__), 'data/configuration')
+        with open(fn, 'w') as f:
+            f.write(fake_conf)
         request = testing.DummyRequest()
-        # with self.assertRaises(SubmitTaskFailure):
-        # submit_task(request)
+        with self.assertRaises(SubmitTaskFailure):
+            submit_task(request)
+        with open(fn, 'w') as f:
+            f.write(original_conf)
 
     def test_catch_mischievous_input(self):
         test_code = "import subprocess\n" \
