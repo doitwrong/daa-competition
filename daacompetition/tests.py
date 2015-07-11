@@ -171,6 +171,10 @@ class FunctionalTests(unittest.TestCase):
         res = self.testapp.get('/leaderboard', status=200)
         self.assertEqual(res.body.decode("utf-8").count('<title>LEADERBOARD</title>'), 1)
 
-    def test_not_loggged(self):
+    def test_view_not_logged(self):
         res = self.testapp.get("/")
+        self.assertEqual(res.body.decode("utf-8").count('<title>DAA COMPETITION LOGIN</title>'), 1)
+
+    def test_submit_not_loggged(self):
+        res = self.testapp.get("/submittask")
         self.assertEqual(res.body.decode("utf-8").count('<title>DAA COMPETITION LOGIN</title>'), 1)
