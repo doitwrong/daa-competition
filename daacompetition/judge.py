@@ -88,7 +88,7 @@ class Judge:
 
                 d[username] = progress+"%\n"
 
-                sorted_x = sorted(d.items(), key=operator.itemgetter(1))
+                sorted_x = sorted(d.items(), key=operator.itemgetter(1), reverse=True)
 
                 print('SORTED X', sorted_x)
 
