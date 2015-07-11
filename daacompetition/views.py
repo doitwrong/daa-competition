@@ -9,7 +9,7 @@ from pyramid.response import Response
 from datetime import datetime
 import threading
 import re
-from daacompetition.constants import Register, Login
+from daacompetition.constants import Register, Login, SubmtiTask
 
 from pyramid.httpexceptions import (
     HTTPFound,
@@ -58,7 +58,7 @@ def view_tests(request):
 def submit_task(request):
     """ logika predavane na zadacha """
     if datetime.now() > TimeConfiguration().expires:
-        raise SubmitTaskFailure('MINA VREMETO ZA PREDAVENE')
+        raise SubmitTaskFailure(SubmtiTask.TIME_EXPIRES.value)
 
     blacklisted = [r'\bsubprocess|eval|system\b.*\(', r'exec']
 
@@ -72,7 +72,7 @@ def submit_task(request):
             # raw_input = re.sub(v, '', raw_input)
             matched = re.search(v, raw_input)
             if matched:
-                raise SubmitTaskFailure('MISCHIEVOUS PIECE OF CODE^^: ' + matched.group(0))
+                raise SubmitTaskFailure(SubmtiTask.MISCHIEVOUS_CODE.value+': ' + matched.group(0))
 
         fn = os.path.join(os.path.dirname(__file__), 'data/solutions/' + request.authenticated_userid + '.py')
         with open(fn, 'w') as f:

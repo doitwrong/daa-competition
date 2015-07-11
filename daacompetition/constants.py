@@ -8,5 +8,12 @@ class Register(Enum):
     ALLOWED_CHARACTERS = 'USERNAME-a moje da sadarja samo slednite: _ [0-9] [a-z] [A-Z]'
     USERNAME_EXISTS = 'IMA VECHE TAKAV POTREBITEl'
 
+
 class Login(Enum):
     LOGIN_FAILED = 'Failed login'
+
+
+class SubmtiTask(Enum):
+    EMPTY_SOLUTION = 'PRAZNO RESHENIE'
+    TIME_EXPIRES = 'MINA VREMETO ZA PREDAVENE'
+    MISCHIEVOUS_CODE = 'MISCHIEVOUS PIECE OF CODE^^'
