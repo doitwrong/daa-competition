@@ -196,7 +196,7 @@ def register(request):
 
             fn = os.path.join(os.path.dirname(__file__), 'data/leaderboard')
             with open(fn, 'a') as f:
-                f.write(request.params['username'] + " 0%")
+                f.write(request.params['username'] + " 0%\n")
 
             fn = os.path.join(os.path.dirname(__file__), 'data/users_permissions')
             with open(fn, 'a') as f:
