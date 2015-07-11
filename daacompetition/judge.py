@@ -79,8 +79,6 @@ class Judge:
             with open(fn, 'r+') as f:
                 lines = f.readlines()
 
-                print("LINES", lines)
-
                 d = {}
                 for line in lines:
                     (key, val) = line.split(' ')
@@ -90,13 +88,9 @@ class Judge:
 
                 sorted_x = sorted(d.items(), key=operator.itemgetter(1), reverse=True)
 
-                print('SORTED X', sorted_x)
-
                 new_list = []
                 for v in sorted_x:
                     new_list.append(v[0]+" "+v[1])
-
-                print('NEW LIST', new_list)
 
                 f.seek(0)
                 f.write(''.join(new_list))
