@@ -1,12 +1,23 @@
 __author__ = 'kaloyan'
 from datetime import datetime, timedelta
+import os
 
 
 class TimeConfiguration:
-    ''' nastroiki na vremeto za saztezanie'''
-    start_date = datetime(2015, 7, 7, 7)
-    duration = timedelta(hours=300)
-    expires = start_date + duration
+    ''' nastroiki na vremeto za saztezanie
+    '''
+    def __init__(self):
+        fn = os.path.join(os.path.dirname(__file__), 'configuration')
 
-# print(format(start_date, '%Y.%m.%d %H:%M:%S'))
-# print(format(expires, '%Y.%m.%d %H:%M:%S'))
+        lines = []
+        with open(fn, 'r') as f:
+            lines = f.readlines()
+        d = {}
+        for line in lines:
+            (key, val) = line.split('|')
+            d[key] = val
+
+        self.start_date = datetime.strptime(d['start_date'].rstrip('\n'), '%b %d %Y %I:%M%p')
+        self.duration = timedelta(hours=int(d['duration'].rstrip('\n')))
+        self.expires = self.start_date + self.duration
+
