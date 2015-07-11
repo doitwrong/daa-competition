@@ -76,21 +76,28 @@ class Judge:
             while not os.access(fn, os.R_OK | os.W_OK):
                 time.sleep(time_to_sleep)
             # f = open(fn, os.R_OK | os.W_OK)
-            f = open(fn, 'w+')
-            lines = f.readlines()
-            d = {}
-            for line in lines:
-                (key, val) = line.split(' ')
-                d[key] = val
+            with open(fn, 'r+') as f:
+                lines = f.readlines()
 
-            d[username] = progress+"%\n"
-            new_list = []
+                print("LINES", lines)
 
-            sorted_x = sorted(d.items(), key=operator.itemgetter(1))
+                d = {}
+                for line in lines:
+                    (key, val) = line.split(' ')
+                    d[key] = val
 
-            new_list = []
-            for v in sorted_x:
-                new_list.append(v[0]+" "+v[1])
+                d[username] = progress+"%\n"
 
-            f.write(''.join(new_list))
-            f.close()
+                sorted_x = sorted(d.items(), key=operator.itemgetter(1))
+
+                print('SORTED X', sorted_x)
+
+                new_list = []
+                for v in sorted_x:
+                    new_list.append(v[0]+" "+v[1])
+
+                print('NEW LIST', new_list)
+
+                f.seek(0)
+                f.write(''.join(new_list))
+                f.truncate()
