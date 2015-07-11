@@ -5,6 +5,7 @@ from importlib.machinery import SourceFileLoader
 from daacompetition.util.parametrized_test import ParametrizedTestCase
 from daacompetition.util.custom_decorators import timeout
 
+
 class JudgeTest(ParametrizedTestCase):
     '''trybva testovete da ima suffix za da razbera koi test e gramnal '''
 
