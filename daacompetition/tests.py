@@ -17,6 +17,20 @@ class ViewIntegrationTests(unittest.TestCase):
     za se narichat integration
     '''
 
+    @classmethod
+    def setUpClass(cls):
+        fn = os.path.join(os.path.dirname(__file__), 'data/test_results/student')
+        with open(fn, 'r') as f:
+            cls.results_data = f.read()
+
+        fn = os.path.join(os.path.dirname(__file__), 'data/solutions/student.py')
+        with open(fn, 'r') as f:
+            cls.solution_data = f.read()
+
+        fn = os.path.join(os.path.dirname(__file__), 'data/leaderboard')
+        with open(fn, 'r') as f:
+            cls.leaderboard_data = f.read()
+
     def setUp(self):
         self.config = testing.setUp()
         self.config.add_route("login", "http://localhost:6543/login")
@@ -26,6 +40,20 @@ class ViewIntegrationTests(unittest.TestCase):
 
     def tearDown(self):
         testing.tearDown()
+
+    @classmethod
+    def tearDownClass(cls):
+        fn = os.path.join(os.path.dirname(__file__), 'data/test_results/student')
+        with open(fn, 'w') as f:
+            f.write(cls.results_data)
+
+        fn = os.path.join(os.path.dirname(__file__), 'data/solutions/student.py')
+        with open(fn, 'w') as f:
+            f.write(cls.solution_data)
+
+        fn = os.path.join(os.path.dirname(__file__), 'data/leaderboard')
+        with open(fn, 'w') as f:
+            f.write(cls.leaderboard_data)
 
     def test_login(self):
         from .views import login
