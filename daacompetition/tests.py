@@ -34,7 +34,7 @@ class ViewIntegrationTests(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        time.sleep(1)
+        time.sleep(1.5)
         fn = os.path.join(os.path.dirname(__file__), 'data/test_results/student')
         with open(fn, 'w') as f:
             f.write(cls.results_data)
