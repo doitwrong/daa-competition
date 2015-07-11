@@ -57,7 +57,7 @@ def view_tests(request):
              permission='student')
 def submit_task(request):
     """ logika predavane na zadacha """
-    if datetime.now() > TimeConfiguration.expires:
+    if datetime.now() > TimeConfiguration().expires:
         raise SubmitTaskFailure('MINA VREMETO ZA PREDAVENE')
 
     blacklisted = [r'\bsubprocess|eval|system\b.*\(', r'exec']
