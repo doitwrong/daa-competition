@@ -106,6 +106,13 @@ class ViewIntegrationTests(unittest.TestCase):
         request.params['repassword'] = "dsadas"
         self.assertEqual(register(request)['message'], Register.ALLOWED_CHARACTERS.value)
 
+    def test_submit_empty(self):
+        from .views import submit_task
+        request = testing.DummyRequest({'form.submitted': True})
+        request.params['solution'] = None
+        with self.assertRaises(SubmitTaskFailure):
+            submit_task(request)
+
 
 class FunctionalTests(unittest.TestCase):
     def setUp(self):
