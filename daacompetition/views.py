@@ -68,6 +68,8 @@ def submit_task(request):
     solution = ''
     if 'form.submitted' in request.params:
         raw_input = request.params['solution']
+        if not raw_input:
+            raise SubmitTaskFailure(SubmtiTask.EMPTY_SOLUTION.value)
         for v in blacklisted:
             # raw_input = re.sub(v, '', raw_input)
             matched = re.search(v, raw_input)
