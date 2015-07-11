@@ -148,7 +148,16 @@ class ViewIntegrationTests(unittest.TestCase):
         from .views import view_tests, submit_task
         request = testing.DummyRequest()
         reponse = view_tests(request)
-        print(reponse['results'])
+        old_number_of_results = len(reponse['results'])
+        test_code = "def solution(da_set):\n" \
+                    "    return da_set/2"
+        request = testing.DummyRequest({'form.submitted': True})
+        request.params['solution'] = test_code
+        submit_task(request)
+        request = testing.DummyRequest()
+        reponse = view_tests(request)
+        new_number_of_results = len(reponse['results'])
+        self.assertNotEqual(old_number_of_results, new_number_of_results)
 
 
 class FunctionalTests(unittest.TestCase):
