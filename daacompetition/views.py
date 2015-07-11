@@ -14,17 +14,17 @@ from daacompetition.constants import Register, Login
 from pyramid.httpexceptions import (
     HTTPFound,
     HTTPNotFound,
-    )
+)
 
 from pyramid.view import (
     view_config,
     forbidden_view_config,
-    )
+)
 
 from pyramid.security import (
     remember,
     forget,
-    )
+)
 
 
 @view_config(route_name='viewtests', renderer='templates/viewtests.pt',
@@ -34,14 +34,14 @@ def view_tests(request):
     username = "<b>" + request.authenticated_userid + "</b>"  # tova ne hubavo no sam slojil ako mi se naloji da vidya
     pagename = 'submit'
     edit_url = request.route_url('viewtests', pagename=pagename)
-    fn = os.path.join(os.path.dirname(__file__), 'data/test_results/'+request.authenticated_userid)
+    fn = os.path.join(os.path.dirname(__file__), 'data/test_results/' + request.authenticated_userid)
     results = []
     with open(fn, 'r') as f:
         results = f.readlines()
 
     progress = ''
     if 1 < len(results):
-        progress = str(int(100 / (results[1].count(' ')+1) * int(results[0])))
+        progress = str(int(100 / (results[1].count(' ') + 1) * int(results[0])))
     else:
         progress = "0"
 
@@ -74,13 +74,13 @@ def submit_task(request):
             if matched:
                 raise SubmitTaskFailure('MISCHIEVOUS PIECE OF CODE^^: ' + matched.group(0))
 
-        fn = os.path.join(os.path.dirname(__file__), 'data/solutions/'+request.authenticated_userid+'.py')
+        fn = os.path.join(os.path.dirname(__file__), 'data/solutions/' + request.authenticated_userid + '.py')
         with open(fn, 'w') as f:
             f.write(raw_input)
         # appendvam judging preda da se izvikat testovete
-        fn = os.path.join(os.path.dirname(__file__), 'data/test_results/'+request.authenticated_userid)
+        fn = os.path.join(os.path.dirname(__file__), 'data/test_results/' + request.authenticated_userid)
         with open(fn, 'a') as f:
-            f.write('\n'+Judge.JUDGING)
+            f.write('\n' + Judge.JUDGING)
         # puskam v thread test suite-a mi
         judge = Judge()
         thread = threading.Thread(target=judge.run, args=(request.authenticated_userid,))
@@ -121,7 +121,7 @@ def login(request):
         came_from=came_from,
         login=login,
         password=password,
-        )
+    )
 
 
 @view_config(route_name='logout')
@@ -147,6 +147,7 @@ def leaderboard(request):
     return dict(results=results,
                 )
 
+
 STUDENTS_GROUP = "group:students"
 
 
@@ -162,8 +163,8 @@ def register(request):
             if not request.params['username'] or \
                     not request.params['password'] or \
                     not request.params['repassword']:
-                        message = Register.ALL_FIELDS_REQ.value
-                        break
+                message = Register.ALL_FIELDS_REQ.value
+                break
 
             if request.params['password'] != request.params['repassword']:
                 message = Register.PASSWORDS_NOT_MATCH.value
@@ -188,25 +189,24 @@ def register(request):
 
             fn = os.path.join(os.path.dirname(__file__), 'data/users')
             with open(fn, 'a') as f:
-                f.write("\n"+request.params['username']+" "
+                f.write("\n" + request.params['username'] + " "
                         + request.params['password'])
 
             fn = os.path.join(os.path.dirname(__file__), 'data/leaderboard')
             with open(fn, 'a') as f:
-                f.write(request.params['username']+" 0%")
+                f.write(request.params['username'] + " 0%")
 
             fn = os.path.join(os.path.dirname(__file__), 'data/users_permissions')
             with open(fn, 'a') as f:
-                f.write("\n"+request.params['username']+" "
+                f.write("\n" + request.params['username'] + " "
                         + STUDENTS_GROUP)
 
-            with open(os.path.join(
-                    os.path.dirname(__file__), 'data/solutions/' + request.params['username'] + '.py'), 'a') as f:
+            with open(os.path.join(os.path.dirname(__file__),
+                                   'data/solutions/' + request.params['username'] + '.py'), 'a') as f:
                 f.close()
 
             with open(os.path.join(os.path.dirname(__file__),
-                                   'data/test_results/'
-                                   + request.params['username']), 'a') as f:
+                                   'data/test_results/' + request.params['username']), 'a') as f:
                 f.write("0")
 
         break
